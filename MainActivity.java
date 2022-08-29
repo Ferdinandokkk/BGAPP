@@ -1,28 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/mybutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="108dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+package com.example.bgapp;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ConstraintLayout bgElement = (ConstraintLayout) findViewById(R.id.activity_main);
+        bgElement.setBackgroundColor(Color.RED);
+        myButtonListenerMethod();
+    }
+    public void myButtonListenerMethod() {
+        final Button button = (Button) findViewById(R.id.mybutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConstraintLayout bgElement = (ConstraintLayout) findViewById(R.id.activity_main);
+                int color = ((ColorDrawable) bgElement.getBackground()).getColor();
+                if (color == Color.RED) {
+                    bgElement.setBackgroundColor(Color.BLUE);
+                } else {
+                    bgElement.setBackgroundColor(Color.RED);
+                }
+            }
+        });
+    }
+}
